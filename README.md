@@ -31,11 +31,11 @@ Settings should be checked first. Before using the application at least **Webex 
 
 The first step of the deployment is a connection to the device in the **Device** section. If the device is in factory default state, there is **admin** user with **blank password**. After each factory reset the device re-generates its SSL certificate. The application detects it and displays a prompt to check the connection to the device, **device connection** link can be used to check the connectivity to the device and accept the certificate:
 
-![Device connection](images/device_connection_1.png)
+<img src="./images/device_connection_1.png" width="80%">
 
 Once the connection to the device is established, the application displays the device information.
 
-![Device connected](images/device_connection_2.png =x100)
+<img src="./images/device_connection_2.png" width="60%">
 
 ### Push the pre-deployment preferences to the device
 
@@ -49,7 +49,7 @@ Once the pre-deployment preferences are in place, a Webex workspace to which the
 
 Once the Workspace is selected the next step is activation code generation and deployment. The code is generated using **Generate activation code** button. Then the code is displayed with the **Deploy activation code** button.
 
-![Create and deploy activation code](images/provision_1.png)
+<img src="./images/provision_1.png" width="70%">
 
 Device status is periodically checked on Webex. Once the code is deployed, the connection status indication should be **connected** or **connected_with_issues**.
 
