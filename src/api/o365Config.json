@@ -1,0 +1,14 @@
+{
+  "tenantId": "28203df6-837c-48b7-8e08-70965c189f00",
+  "clientId": "582631cd-2037-42d2-8243-30a1d69df16e",
+  "clientSecret": "",
+  "redirecURI": "http://localhost:4000/callbacko365",
+  "scope": [
+    "Directory.Read.All",
+    "Licenseassignment.ReadWrite.All",
+    "MailboxSettings.Read",
+    "MailboxSettings.ReadWrite",
+    "Teamworkdevice.Read.All",
+    "Teamworkdevice.ReadWrite.All"
+  ]
+}

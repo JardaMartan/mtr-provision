@@ -1,0 +1,54 @@
+#app {
+  /* max-width: 850px; */
+  margin: 0 auto;
+}
+
+nav {
+  padding: 20px 0 20px 0;
+}
+
+.form-control {
+  display: flex;
+  justify-content: space-between;
+  width: max-content;
+  min-width: 20%;
+}
+
+.alert {
+  color: red;
+  padding: 0px;
+  margin: 0px;
+}
+
+.log-display {
+  /* overflow: auto; */
+  /* display: flex; */
+  /* flex-direction: column-reverse; */
+  overflow-y: scroll;
+}
+
+.md-select__label {
+  min-width: 200px;
+  width: 200px;
+}
+
+.md-input {
+  min-width: 236px;
+  width: 236px;
+}
+
+.md-label {
+  min-width: 150px;
+  padding-bottom: 12px;
+  padding-left: 6px;
+}
+
+.input-container {
+  display: flex; /* Use flexbox to create a horizontal layout */
+  align-items: center;
+  padding-top: 8px;
+}
+
+.element {
+  margin-right: 10px; /* Optional: Add margin for spacing */
+}

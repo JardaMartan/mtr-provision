@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<Status product="Cisco Codec" version="ce11.7.1.8.55e6bc19b3b" apiVersion="4">
+  <SystemUnit>
+    <BroadcastName>Jaroslav Martan Desk Pro</BroadcastName>
+    <DeveloperPreview>
+      <Mode>Off</Mode>
+    </DeveloperPreview>
+    <Extensions>
+      <Microsoft>
+        <InCall>False</InCall>
+        <Supported>True</Supported>
+      </Microsoft>
+    </Extensions>
+    <Hardware>
+      <DRAM>8</DRAM>
+      <HasWifi>True</HasWifi>
+      <MainBoard>
+        <Revision>C</Revision>
+      </MainBoard>
+      <Module>
+        <CompatibilityLevel>2</CompatibilityLevel>
+        <DeviceId>f54098d8-1c56-5791-a0a1-e70709a5f5b5</DeviceId>
+        <SerialNumber>FOC2521NEGJ</SerialNumber>
+      </Module>
+      <Monitoring>
+        <Temperature>
+          <Status>Normal</Status>
+        </Temperature>
+      </Monitoring>
+      <UDI>CS-DESKPRO-K9 V01 FOC2521NEGJ</UDI>
+      <USBC item="1" maxOccurrence="n">
+        <Connected>True</Connected>
+      </USBC>
+    </Hardware>
+    <LastShutdownReason>Upgrade</LastShutdownReason>
+    <LastShutdownTime>2023-09-13T14:24:05Z</LastShutdownTime>
+    <ProductId>Cisco Desk Pro</ProductId>
+    <ProductPlatform>Desk Pro</ProductPlatform>
+    <ProductType>Cisco Codec</ProductType>
+    <Software>
+      <DisplayName>RoomOS 11.7.1.8 55e6bc19b3b</DisplayName>
+      <Name>s53300</Name>
+      <OptionKeys>
+        <DeveloperPreview>False</DeveloperPreview>
+        <Encryption>True</Encryption>
+        <MultiSite>False</MultiSite>
+        <RemoteMonitoring>False</RemoteMonitoring>
+      </OptionKeys>
+      <ReleaseDate>2023-08-16</ReleaseDate>
+      <Version>ce11.7.1.8.55e6bc19b3b</Version>
+    </Software>
+    <State>
+      <CameraLid>Open</CameraLid>
+      <NumberOfActiveCalls>0</NumberOfActiveCalls>
+      <NumberOfInProgressCalls>0</NumberOfInProgressCalls>
+      <NumberOfSuspendedCalls>0</NumberOfSuspendedCalls>
+      <Subsystem>
+        <Application>Initialized</Application>
+      </Subsystem>
+      <System>Initialized</System>
+    </State>
+    <Uptime>70807</Uptime>
+  </SystemUnit>
+</Status>

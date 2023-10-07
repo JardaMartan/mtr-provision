@@ -1,0 +1,36 @@
+/* SideBySideDivs.css */
+
+.container {
+  display: flex; /* Use flexbox to create a row layout */
+  /* flex-wrap: wrap; */
+  justify-content: space-between; /* Distribute space between the two divs */
+  align-items: top; /* Vertically align the divs */
+  width: 100%;
+}
+
+.side-by-side {
+  padding: 20px;
+  border: 1px solid #ddd;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.left-div {
+  /* flex-grow: 1;
+  flex-basis: 50%; */
+  background-color: #f0f0f0;
+  min-width: 60%;
+}
+
+.right-div {
+  /* flex-grow: 1;
+  flex-basis: 50%; */
+  background-color: #ffffff;
+  /* flex: 1; Make right div follow the height of left div */
+  /* overflow: scroll; */
+  /* white-space: nowrap; */
+}
+
+.scrollable {
+  max-height: 100%;
+  overflow-y: auto;
+}

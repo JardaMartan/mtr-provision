@@ -1,0 +1,48 @@
+.log-entry-time {
+  /* color: #999; */
+  font-size: 0.8em;
+  margin-right: 0.5em;
+  width: 50px;
+}
+
+.log-entry-source {
+  /* color: #999; */
+  font-size: 0.8em;
+  margin-right: 0.5em;
+  width: 20px;
+}
+
+.log-entry-level {
+  /* color: #999; */
+  font-size: 0.8em;
+  margin-right: 0.5em;
+  width: 10px;
+}
+
+.log-entry-message {
+  font-size: 0.8em;
+}
+
+.log-entry {
+  margin-bottom: 0.5em;
+}
+
+.log-entry-container {
+  margin-bottom: 0.5em;
+}
+
+.log {
+  margin-bottom: 0.5em;
+}
+
+.error {
+  color: red;
+}
+
+.warn {
+  color: orange;
+}
+
+.info {
+  color: blue;
+}
