@@ -13,6 +13,8 @@ The application performs following steps:
 
 The application is written in [React/Redux](https://react-redux.js.org) and is using [Momentum Design](https://momentum.design/components) React components.
 
+The application can be seen in action [here](https://kp.cz/~jarda/deviceconfig).
+
 ## Settings
 
 Each of the steps requires some set of parameters which can be configured in **Settings** section:
