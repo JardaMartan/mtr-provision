@@ -11,6 +11,8 @@ The application performs following steps:
 2. **deployment** - create or select Webex workspace, generate activation code, deploy the code
 3. **post-deployment configuration** - create a local user on the video device
 
+The application is written in [React/Redux](https://react-redux.js.org) and is using [Momentum Design](https://momentum.design/components) React components.
+
 ## Settings
 
 Each of the steps requires some set of parameters which can be configured in **Settings** section:
