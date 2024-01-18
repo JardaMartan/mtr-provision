@@ -4,7 +4,7 @@
     "name": "Jaroslav Martan",
     "email": "jmartan@cisco.com"
   },
-  "description": "Provisioning of MTR",
+  "description": "Webex Device Provisioning",
   "scripts": {
     "start": "run-p start:dev",
     "start:dev": "webpack serve --config webpack.config.dev.js",
