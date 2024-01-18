@@ -44,4 +44,4 @@ notes.txt
 src/tmp
 
 # my config
-src/api/webexConfig-kp.json
+src/api/webexConfig-*.json
