@@ -4,8 +4,8 @@ import { Button } from "@momentum-ui/react";
 
 const HomePage = () => (
   <div className="jumbotron">
-    <h1>MTR Device Administration</h1>
-    <p>Deploy Cisco Video Device for MTR.</p>
+    <h1>Webex Device Deployment</h1>
+    <p>Deploy Cisco Webex Device to Webex Control Hub in RoomOS or MTR mode.</p>
     <Link to="device">
       <Button onClick={() => {}} color="blue">
         Device

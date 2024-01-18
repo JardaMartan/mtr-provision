@@ -57,7 +57,7 @@ const OtherPreferences = ({ updateDevicePreferences, preferences }) => {
         onChange={handleInstallMTRChange}
         htmlId="install-mtr"
         name="install-mtr"
-        label="Install MTR software"
+        label="Install MTR (Microsoft Teams Room) software"
       />
     </div>
   );
