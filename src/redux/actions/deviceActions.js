@@ -398,47 +398,87 @@ export function deployPostRegistrationSettings(webex, deviceId, preferences) {
         )} to device ${deviceId}...`,
       })
     );
-    const userData = {
-      Active: "True",
-      Username: preferences.localUser.username,
-      Passphrase: preferences.localUser.password,
-      PassphraseChangeRequired: "False",
-      Role: ["Admin", "Audit", "User", "Integrator", "RoomControl"],
-      ShellLogin: "True",
-    };
-    try {
-      dispatch(
-        log({
-          source: "webex",
-          level: "info",
-          message: `about to createUser: ${JSON.stringify(userData)}`,
-        })
-      );
-      const createUser = await webexApi.runXapiCommand(
-        webex,
-        deviceId,
-        "UserManagement.User.Add",
-        userData
-      );
-      dispatch(
-        log({
-          source: "webex",
-          level: "info",
-          message: `createUser done: ${JSON.stringify(createUser)}`,
-        })
-      );
-      dispatch(deployPostRegistrationSettingsSuccess());
-    } catch (error) {
-      console.error(error);
-      dispatch(
-        log({
-          source: "webex",
-          level: "error",
-          message:
-            "Post registration settings failed to deploy: " + error.message,
-        })
-      );
-      dispatch(deployPostRegistrationSettingsFailed());
+    if (preferences.localUser.username.length > 0) {
+      const userData = {
+        Active: "True",
+        Username: preferences.localUser.username,
+        Passphrase: preferences.localUser.password,
+        PassphraseChangeRequired: "False",
+        Role: ["Admin", "Audit", "User", "Integrator", "RoomControl"],
+        ShellLogin: "True",
+      };
+      try {
+        dispatch(
+          log({
+            source: "webex",
+            level: "info",
+            message: `about to createUser: ${JSON.stringify(userData)}`,
+          })
+        );
+        const createUser = await webexApi.runXapiCommand(
+          webex,
+          deviceId,
+          "UserManagement.User.Add",
+          userData
+        );
+        dispatch(
+          log({
+            source: "webex",
+            level: "info",
+            message: `createUser done: ${JSON.stringify(createUser)}`,
+          })
+        );
+        dispatch(deployPostRegistrationSettingsSuccess());
+      } catch (error) {
+        console.error(error);
+        dispatch(
+          log({
+            source: "webex",
+            level: "error",
+            message:
+              "Post registration settings failed to deploy: " + error.message,
+          })
+        );
+        dispatch(deployPostRegistrationSettingsFailed());
+      }
+    }
+    if (preferences.installMTR) {
+      try {
+        dispatch(
+          log({
+            source: "webex",
+            level: "info",
+            message: "about to install MTR software",
+          })
+        );
+        const installMTR = await webexApi.runXapiCommand(
+          webex,
+          deviceId,
+          "MicrosoftTeams.Install",
+          {
+            Name: "MicrosoftTeamsRooms",
+          }
+        );
+        dispatch(
+          log({
+            source: "webex",
+            level: "info",
+            message: `installMTR done: ${JSON.stringify(installMTR)}`,
+          })
+        );
+        dispatch(deployPostRegistrationSettingsSuccess());
+      } catch (error) {
+        console.error(error);
+        dispatch(
+          log({
+            source: "webex",
+            level: "error",
+            message:
+              "Post registration settings failed to deploy: " + error.message,
+          })
+        );
+        dispatch(deployPostRegistrationSettingsFailed());
+      }
     }
   };
 }

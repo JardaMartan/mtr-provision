@@ -20,6 +20,13 @@ const OtherPreferences = ({ updateDevicePreferences, preferences }) => {
     });
   }
 
+  function handleInstallMTRChange(event) {
+    const value = event.target.checked;
+    updateDevicePreferences({
+      installMTR: value,
+    });
+  }
+
   return (
     <div>
       <h5>Other Preferences</h5>
@@ -43,6 +50,14 @@ const OtherPreferences = ({ updateDevicePreferences, preferences }) => {
         htmlId="close-wizard"
         name="close-wizard"
         label="Close initial wizard after deployment"
+      />
+      <ToggleSwitch
+        // defaultChecked={false}
+        checked={preferences.installMTR}
+        onChange={handleInstallMTRChange}
+        htmlId="install-mtr"
+        name="install-mtr"
+        label="Install MTR software"
       />
     </div>
   );

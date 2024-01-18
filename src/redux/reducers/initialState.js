@@ -35,6 +35,7 @@ export default {
       password: "",
     },
     closeInitialWizard: true,
+    installMTR: false,
     language: "English",
     timeZone: "Europe/London",
     timeFormat: "24H",

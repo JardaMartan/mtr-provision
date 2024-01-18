@@ -155,9 +155,11 @@ const Provision = ({
   return (
     <div>
       <h1>Provision</h1>
-      <p>Create resource mailbox</p>
-      <p>Get account password</p>
-      <p>Assign licenses to account</p>
+      <p>Prepare the Office365 side:</p>
+      <ul>Create resource mailbox</ul>
+      <p>If the device is being deployed for MTR:</p>
+      <ul>Configure account password for the resource mailbox in Azure AD</ul>
+      <ul>Assign licenses to the account</ul>
       <hr />
       <h4>Deploy pre-deployment device preferences</h4>
       <br />
@@ -200,10 +202,9 @@ const Provision = ({
       )}
       <hr />
       <p>
-        If the device has remote monitoring option, grab a screenshot and run
-        OCR to get MTR prompt
+        If the device has remote monitoring option installed, grab a screenshot
+        and login the device to MS Teams
       </p>
-      <p>Login the MTR</p>
     </div>
   );
 };
