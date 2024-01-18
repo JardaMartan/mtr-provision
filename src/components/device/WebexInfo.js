@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 const WebexInfo = ({ webexInfo }) => {
   return (
     <div>
-      <b>Webex device status</b>
+      <b>Webex Control Hub device status</b>
       <div className="input-container">
         <label className="md-label element">Name</label>
         <label className="md-label element">{webexInfo.displayName}</label>
