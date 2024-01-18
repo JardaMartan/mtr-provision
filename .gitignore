@@ -42,3 +42,6 @@ notes.txt
 
 # temporary files
 src/tmp
+
+# my config
+src/api/webexConfig-kp.json
