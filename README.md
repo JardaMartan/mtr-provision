@@ -20,7 +20,7 @@ The application can be seen in action [here](https://kp.cz/~jarda/deviceconfig).
 Each of the steps requires some set of parameters which can be configured in **Settings** section:
 
 - pre-deployment parameters include: http proxy, date and time configuration and language selection.
-- deployment parameters include: Webex authorization (admin account is needed) and "Close initial wizard after deployment" option. That one determines whether the initial wizard is automatically closed after activation. **If the device is being provisioned for MTR mode, this option should be turned off** (do not close the wizard) as the initial wizard contains MTR mode selection which cannot be performed via device's API. For the RoomOS mode, the parameter can be turned on.
+- deployment parameters include: Webex authorization (admin account is needed) and "Close initial wizard after deployment" option. That one determines whether the initial wizard is automatically closed after activation. If the option is not checked, the initial wizard needs to be closed manually on the device. Both RoomOS and MTR activations now allow to close the initial wizard automatically.
 - post-deployment parameters include: username and password of a local user that gets created on the device to ease the device management and troubleshooting.
 
 The application is self-contained, there is no server-side. The settings and Webex authorization are stored in the browser.
