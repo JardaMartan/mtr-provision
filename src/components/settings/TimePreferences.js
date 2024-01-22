@@ -5,15 +5,15 @@ import { updateDevicePreferences } from "../../redux/actions/prefsActions";
 // import SelectInput from "../common/SelectInput";
 import * as dateTime from "../../constants/dateTime";
 // import { ComboBox } from "@momentum-ui/react";
-import { Select, SelectOption } from "@momentum-ui/react";
+import { Select, SelectOption, ComboBox } from "@momentum-ui/react";
 
 const TimePreferences = ({ updateDevicePreferences, preferences }) => {
-  function handleTZChange(event) {
-    const { name, value } = event[0]; //eslint-disable-line no-unused-vars
-    updateDevicePreferences({
-      timeZone: value,
-    });
-  }
+  // function handleTZChange(event) {
+  //   const { name, value } = event[0]; //eslint-disable-line no-unused-vars
+  //   updateDevicePreferences({
+  //     timeZone: value,
+  //   });
+  // }
 
   function handleDFChange(event) {
     const { name, value } = event[0]; //eslint-disable-line no-unused-vars
@@ -29,10 +29,17 @@ const TimePreferences = ({ updateDevicePreferences, preferences }) => {
     });
   }
 
+  function comboTZChange(event) {
+    const value = event.target.title; //eslint-disable-line no-unused-vars
+    updateDevicePreferences({
+      timeZone: value,
+    });
+  }
+
   return (
     <div>
       <h5>Time Preferences</h5>
-      <div className="input-container">
+      {/* <div className="input-container">
         <label className="md-label element">Time Zone</label>{" "}
         <Select
           defaultValue={preferences.timeZone}
@@ -44,6 +51,19 @@ const TimePreferences = ({ updateDevicePreferences, preferences }) => {
             return <SelectOption key={tz} value={tz} label={tz} />;
           })}
         </Select>
+      </div> */}
+      <div className="input-container">
+        <label className="md-label element">Time Zone</label>{" "}
+        <ComboBox
+          placeholder={preferences.timeZone}
+          label="Time Zone"
+          className="element"
+          ordered={true}
+          onSelect={comboTZChange}
+          options={dateTime.TIME_ZONES}
+          searchItem={true}
+          inputProps={{ defaultValue: preferences.timeZone, clear: true }}
+        ></ComboBox>
       </div>
       <div className="input-container">
         <label className="md-label element">Date Format</label>{" "}
