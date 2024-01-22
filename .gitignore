@@ -45,3 +45,5 @@ src/tmp
 
 # my config
 src/api/webexConfig-*.json
+
+.vscode
