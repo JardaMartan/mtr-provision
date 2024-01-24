@@ -12,6 +12,7 @@ import {
   setLanguage,
   getDevices,
   createWorkspace,
+  resetDeviceWebex,
 } from "../../redux/actions/deviceActions";
 import { loadWorkspaces } from "../../redux/actions/workspacesActions";
 import WorkspaceSelection from "./WorkspaceSelection";
@@ -20,6 +21,7 @@ import DeployDeviceSettings from "./DeployDeviceSettings";
 import DeployPostRegistrationSettings from "./DeployPostRegistrationSettings";
 import CreateWorkspace from "./CreateWorkspace";
 import CheckWebexAuthorization from "./CheckWebexAuthorization";
+import DeviceReset from "../device/DeviceReset";
 
 const Provision = ({
   deployDevicePrefs,
@@ -33,6 +35,7 @@ const Provision = ({
   deviceConnection,
   getDevices,
   createWorkspace,
+  resetDeviceWebex,
   device,
   connection,
   webex,
@@ -152,6 +155,11 @@ const Provision = ({
     console.log(`device info: ${JSON.stringify(info)}`);
   }, [info]);
 
+  function doDeviceResetWebex() {
+    console.log("reset device");
+    resetDeviceWebex(webex, info.deviceId);
+  }
+
   return (
     <div>
       <h1>Provision</h1>
@@ -200,6 +208,12 @@ const Provision = ({
       ) : (
         <CheckWebexAuthorization />
       )}
+      <br />
+      {webexIsAuthorized ? (
+        <DeviceReset info={info} doDeviceReset={doDeviceResetWebex} />
+      ) : (
+        <></>
+      )}
       <hr />
       <p>
         If the device has remote monitoring option installed, grab a screenshot
@@ -221,6 +235,7 @@ Provision.propTypes = {
   getDevices: PropTypes.func.isRequired,
   createWorkspace: PropTypes.func.isRequired,
   deviceConnection: PropTypes.func.isRequired,
+  resetDeviceWebex: PropTypes.func.isRequired,
   device: PropTypes.object.isRequired,
   connection: PropTypes.object.isRequired,
   webex: PropTypes.object.isRequired,
@@ -255,6 +270,7 @@ const mapDispatchToProps = {
   getDevices,
   createWorkspace,
   deviceConnection,
+  resetDeviceWebex,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Provision);

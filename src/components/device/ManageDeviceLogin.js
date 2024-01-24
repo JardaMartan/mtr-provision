@@ -5,11 +5,13 @@ import {
   deviceConnection,
   getDeviceInfo,
   getDevices,
+  resetDevice,
 } from "../../redux/actions/deviceActions";
 import DeviceLoginPage from "./DeviceLoginPage";
 import PropTypes from "prop-types";
 import DeviceInfo from "./DeviceInfo";
 import WebexInfo from "./WebexInfo";
+import DeviceReset from "./DeviceReset";
 
 function ManageDeviceLogin({
   deviceLogin,
@@ -17,6 +19,7 @@ function ManageDeviceLogin({
   getDevices,
   getDeviceInfo,
   device,
+  resetDevice,
   connection,
   connectionConfigured,
   info,
@@ -74,6 +77,11 @@ function ManageDeviceLogin({
     });
   }
 
+  function doLocalDeviceReset() {
+    console.log(`doLocalDeviceReset: ${JSON.stringify(device.connection)}`);
+    resetDevice(device);
+  }
+
   return (
     <div>
       <DeviceLoginPage
@@ -85,6 +93,7 @@ function ManageDeviceLogin({
       <hr />
       <DeviceInfo connection={connection} info={info} />
       <WebexInfo webexInfo={webexInfo} />
+      <DeviceReset info={info} doDeviceReset={doLocalDeviceReset} />
     </div>
   );
 }
@@ -100,6 +109,7 @@ ManageDeviceLogin.propTypes = {
   deviceConnection: PropTypes.func.isRequired,
   getDevices: PropTypes.func.isRequired,
   getDeviceInfo: PropTypes.func.isRequired,
+  resetDevice: PropTypes.func.isRequired,
   errors: PropTypes.object,
   //   history: PropTypes.object.isRequired,
 };
@@ -120,6 +130,7 @@ const mapDispatchToProps = {
   deviceConnection,
   getDevices,
   getDeviceInfo,
+  resetDevice,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageDeviceLogin);

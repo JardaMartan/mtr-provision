@@ -629,3 +629,100 @@ export function createWorkspace(webex, workspaceName, locationId, floorId) {
       });
   };
 }
+
+export function resetDeviceSuccess() {
+  return { type: types.DEVICE_RESET_SUCCESS };
+}
+
+export function resetDeviceFailed() {
+  return { type: types.DEVICE_RESET_FAILED };
+}
+
+export function resetDevice(device) {
+  //eslint-disable-next-line no-unused-vars
+  return async function (dispatch, getState) {
+    dispatch(deviceBeginApiCall());
+    dispatch(
+      log({
+        source: "device",
+        level: "info",
+        message: `Reset device ${device.connection.ipAddress}...`,
+      })
+    );
+    return deviceApi
+      .resetDevice({ ...device.connection })
+      .then(() => {
+        dispatch(
+          log({
+            source: "device",
+            level: "info",
+            message: "Device reset",
+          })
+        );
+        dispatch(resetDeviceSuccess());
+      })
+      .catch((error) => {
+        console.error(error);
+        dispatch(
+          log({
+            source: "device",
+            level: "error",
+            message: "Device reset failed: " + JSON.stringify(error),
+          })
+        );
+        dispatch(resetDeviceFailed());
+      });
+  };
+}
+
+export function resetDeviceWebex(webex, deviceId) {
+  //eslint-disable-next-line no-unused-vars
+  return async function (dispatch, getState) {
+    console.log(`reset Webex device ${deviceId}`);
+    dispatch(webexBeginApiCall());
+    dispatch(
+      log({
+        source: "webex",
+        level: "info",
+        message: `Reset Webex device ${deviceId}`,
+      })
+    );
+    const resetData = {
+      Action: "Restart",
+      Force: "True",
+    };
+    try {
+      dispatch(
+        log({
+          source: "webex",
+          level: "info",
+          message: `About to reset device: ${JSON.stringify(resetData)}`,
+        })
+      );
+      const resetDeviceResult = await webexApi.runXapiCommand(
+        webex,
+        deviceId,
+        "SystemUnit.Boot",
+        resetData
+      );
+      dispatch(
+        log({
+          source: "webex",
+          level: "info",
+          message: `Device reset done: ${JSON.stringify(resetDeviceResult)}`,
+        })
+      );
+      dispatch(resetDeviceSuccess());
+    } catch (error) {
+      console.error(error);
+      dispatch(
+        log({
+          source: "webex",
+          level: "error",
+          message: "Device reset failed: " + error.message,
+        })
+      );
+      dispatch(resetDeviceFailed());
+    }
+  };
+}

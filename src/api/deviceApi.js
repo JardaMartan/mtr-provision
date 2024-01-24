@@ -195,3 +195,24 @@ export async function setLanguage({ ipAddress, username, password, language }) {
     });
   });
 }
+
+export async function resetDevice({ ipAddress, username, password }) {
+  return new Promise((resolve, reject) => {
+    createXapiClient(ipAddress, username, password).then(async (xapi) => {
+      try {
+        const configResult = [];
+        const res = await xapi.Command.SystemUnit.Boot({
+          Action: "Restart",
+          Force: "True",
+        });
+        configResult.push("device reset, result: " + JSON.stringify(res));
+        console.log("device reset");
+        xapi.close();
+        resolve(configResult); // Resolve the Promise with the status
+      } catch (error) {
+        console.error(`device reset error: ${JSON.stringify(error)}`);
+        reject(error); // Reject the Promise if there's an error
+      }
+    });
+  });
+}
