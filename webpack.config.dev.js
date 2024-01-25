@@ -1,6 +1,8 @@
 const webpack = require("webpack");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const EventHooksPlugin = require("event-hooks-webpack-plugin");
+const fs = require("fs-extra");
 
 process.env.NODE_ENV = "development";
 
@@ -31,6 +33,18 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: "src/index.html",
       favicon: "src/favicon.ico",
+    }),
+    new EventHooksPlugin({
+      afterPlugins: (compilation, done) => {
+        console.log(
+          "Copying webpackConfig.localhost.json file to webpackConfig.json"
+        );
+        fs.copy(
+          "src/api/webexConfig.localhost.json",
+          "src/api/webexConfig.json",
+          done
+        );
+      },
     }),
   ],
   module: {

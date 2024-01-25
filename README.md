@@ -85,6 +85,6 @@ identity:placeonetimepassword_create
 spark:xapi_statuses  
 spark:xapi_commands
 
-Once the integration is created, enter its Integration Id, Client Id and Redirect URI to the [src/api/webexConfig.json](src/api/webexConfig.json). Redirect URI should be in the form of **https://fqdn_of_the_application_host/app_directory/callbackwebex**. The **app_directory** needs to be also set in [webpack.config.prod.js](webpack.config.prod.js) in the **publicPath** parameter (line 16).
+Once the integration is created, enter its Integration Id, Client Id and Redirect URI to the [src/api/webexConfig.prod.json](src/api/webexConfig.prod.json). Redirect URI should be in the form of **https://fqdn_of_the_application_host/app_directory/callbackwebex**. The **app_directory** needs to be also set in [webpack.config.prod.js](webpack.config.prod.js) in the **publicPath** and **process.env.ROOT_URL** parameters (lines 16 and 31).
 
 Run **npm run build** and copy all content of **build** directory to the application hosting server.

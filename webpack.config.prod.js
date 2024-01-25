@@ -3,6 +3,8 @@ const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const webpackBundleAnalyzer = require("webpack-bundle-analyzer");
+const EventHooksPlugin = require("event-hooks-webpack-plugin");
+const fs = require("fs-extra");
 
 process.env.NODE_ENV = "production";
 
@@ -43,6 +45,18 @@ module.exports = {
         minifyJS: true,
         minifyCSS: true,
         minifyURLs: true,
+      },
+    }),
+    new EventHooksPlugin({
+      afterPlugins: (compilation, done) => {
+        console.log(
+          "Copying webpackConfig.prod.json file to webpackConfig.json"
+        );
+        fs.copy(
+          "src/api/webexConfig.prod.json",
+          "src/api/webexConfig.json",
+          done
+        );
       },
     }),
   ],

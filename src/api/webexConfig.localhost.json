@@ -1,0 +1,21 @@
+{
+  "integrationId": "Y2lzY29zcGFyazovL3VzL0FQUExJQ0FUSU9OL0MwMmNiMDI1MzU1MTgzY2Y4MTRmMmYzNDc5MzA0MjNjMDAzNDhmNGU1MzEyMDEzNWMxYjgyNmE4OWIxMzgxMjM3",
+  "clientId": "C02cb025355183cf814f2f347930423c00348f4e53120135c1b826a89b1381237",
+  "redirecURI": "http://localhost:4000/callbackwebex",
+  "scope": [
+    "spark-admin:workspaces_write",
+    "spark-admin:locations_write",
+    "spark:kms",
+    "spark-admin:devices_read",
+    "spark-admin:locations_read",
+    "spark-admin:people_write",
+    "spark-admin:workspace_locations_write",
+    "spark-admin:workspace_locations_read",
+    "spark-admin:workspaces_read",
+    "spark-admin:devices_write",
+    "spark-admin:people_read",
+    "identity:placeonetimepassword_create",
+    "spark:xapi_statuses",
+    "spark:xapi_commands"
+  ]
+}
