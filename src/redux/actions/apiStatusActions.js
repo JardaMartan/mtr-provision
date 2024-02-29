@@ -23,3 +23,7 @@ export function deviceBeginApiCall() {
 export function deviceApiCallError() {
   return { type: types.DEVICE_API_CALL_ERROR };
 }
+
+export function roomOSBeginApiCall() {
+  return { type: types.ROOMOS_BEGIN_API_CALL };
+}

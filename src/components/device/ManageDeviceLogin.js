@@ -6,12 +6,15 @@ import {
   getDeviceInfo,
   getDevices,
   resetDevice,
+  deviceUpdate,
+  swUpdateInfo,
 } from "../../redux/actions/deviceActions";
 import DeviceLoginPage from "./DeviceLoginPage";
 import PropTypes from "prop-types";
 import DeviceInfo from "./DeviceInfo";
 import WebexInfo from "./WebexInfo";
 import DeviceReset from "./DeviceReset";
+import SoftwareUpdate from "./SoftwareUpdate";
 
 function ManageDeviceLogin({
   deviceLogin,
@@ -20,6 +23,8 @@ function ManageDeviceLogin({
   getDeviceInfo,
   device,
   resetDevice,
+  swUpdateInfo,
+  deviceUpdate,
   connection,
   connectionConfigured,
   info,
@@ -29,10 +34,24 @@ function ManageDeviceLogin({
 }) {
   const [errors, setErrors] = useState({}); // eslint-disable-line no-unused-vars
   const [deviceConnected, setDeviceConnected] = useState(false);
+  const [availableVersion, setAvailableVersion] = useState("");
 
   useEffect(() => {
     setDeviceConnected(info.status === "connected");
-  }, [info]);
+    if (info.status === "connected") {
+      console.log(`device connected: ${info.status}`);
+      swUpdateInfo(info.platform, device.swChannel);
+    }
+  }, [info, device.swChannel]);
+
+  useEffect(() => {
+    console.log("swUpdateInfo changed");
+    if (device.swUpdateInfo.manifest) {
+      setAvailableVersion(
+        device.swUpdateInfo.manifest.components[0].displayVersion
+      );
+    }
+  }, [device.swUpdateInfo]);
 
   useEffect(() => {
     console.log(`webex info changed: ${JSON.stringify(webexInfo)}`);
@@ -82,6 +101,11 @@ function ManageDeviceLogin({
     resetDevice(device);
   }
 
+  function handleDeviceUpdate() {
+    console.log(`handleDeviceUpdate: ${JSON.stringify(device.connection)}`);
+    deviceUpdate(device);
+  }
+
   return (
     <div>
       <DeviceLoginPage
@@ -92,6 +116,15 @@ function ManageDeviceLogin({
       />
       <hr />
       <DeviceInfo connection={connection} info={info} />
+      {info.status === "connected" && (
+        <div>
+          <SoftwareUpdate
+            availableVersion={availableVersion}
+            deviceUpdate={handleDeviceUpdate}
+          />
+        </div>
+      )}
+      <hr />
       <WebexInfo webexInfo={webexInfo} />
       <DeviceReset info={info} doDeviceReset={doLocalDeviceReset} />
     </div>
@@ -110,6 +143,8 @@ ManageDeviceLogin.propTypes = {
   getDevices: PropTypes.func.isRequired,
   getDeviceInfo: PropTypes.func.isRequired,
   resetDevice: PropTypes.func.isRequired,
+  swUpdateInfo: PropTypes.func.isRequired,
+  deviceUpdate: PropTypes.func.isRequired,
   errors: PropTypes.object,
   //   history: PropTypes.object.isRequired,
 };
@@ -131,6 +166,8 @@ const mapDispatchToProps = {
   getDevices,
   getDeviceInfo,
   resetDevice,
+  deviceUpdate,
+  swUpdateInfo,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ManageDeviceLogin);

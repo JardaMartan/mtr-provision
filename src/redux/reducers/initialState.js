@@ -10,12 +10,16 @@ export default {
     info: {
       serialNumber: "",
       model: "",
+      platform: "",
+      sowftwareVersion: "",
       status: "disconnected",
       statusDescription: "Disconnected",
       webexInfo: {},
     },
     activationCode: {},
     connectionConfigured: false,
+    swChannel: "Stable",
+    swUpdateInfo: {},
   },
   webex: {
     accessToken: "",

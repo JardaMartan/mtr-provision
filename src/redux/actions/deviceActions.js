@@ -1,7 +1,12 @@
 import * as types from "./actionTypes";
 import * as deviceApi from "../../api/deviceApi";
 import * as webexApi from "../../api/webexApi";
-import { deviceBeginApiCall, webexBeginApiCall } from "./apiStatusActions";
+import * as roomOSApi from "../../api/roomOSApi";
+import {
+  deviceBeginApiCall,
+  webexBeginApiCall,
+  roomOSBeginApiCall,
+} from "./apiStatusActions";
 import { log } from "./logAction";
 import { loadWorkspaces } from "./workspacesActions";
 
@@ -63,6 +68,8 @@ export function getDeviceInfo(device, dispatchLog) {
         const info = {
           serialNumber: deviceStatus.Hardware.Module.SerialNumber,
           model: deviceStatus.ProductId,
+          platform: deviceStatus.ProductPlatform,
+          softwareVersion: deviceStatus.Software.DisplayName,
           status: "connected",
           statusDescription: "Connected",
         };
@@ -724,5 +731,90 @@ export function resetDeviceWebex(webex, deviceId) {
       );
       dispatch(resetDeviceFailed());
     }
+  };
+}
+
+export function swUpdateInfo(modelName, channel) {
+  //eslint-disable-next-line no-unused-vars
+  return async function (dispatch, getState) {
+    dispatch(roomOSBeginApiCall());
+    return roomOSApi
+      .getManifest(modelName, channel)
+      .then((swUpdateInfo) => {
+        dispatch({
+          type: types.SWUPDATE_INFO_SUCCESS,
+          swUpdateInfo,
+        });
+      })
+      .catch((error) => {
+        console.error(error);
+        dispatch({
+          type: types.SWUPDATE_INFO_FAILED,
+          error,
+        });
+      });
+  };
+}
+
+export function setSwChannel(swChannel) {
+  return { type: types.SET_SW_CHANNEL, swChannel };
+}
+
+export function deviceUpdateSuccess() {
+  return { type: types.DEVICE_UPDATE_SUCCESS };
+}
+
+export function deviceUpdateFailed() {
+  return { type: types.DEVICE_UPDATE_FAILED };
+}
+
+export function deviceUpdate(device) {
+  if (!device.swUpdateInfo.manifest) {
+    return function (dispatch) {
+      dispatch(
+        log({
+          source: "device",
+          level: "error",
+          message: "No software update manifest available",
+        })
+      );
+    };
+  }
+  //eslint-disable-next-line no-unused-vars
+  return async function (dispatch, getState) {
+    dispatch(deviceBeginApiCall());
+    dispatch(
+      log({
+        source: "device",
+        level: "info",
+        message: `Device update starting ${device.connection.ipAddress}...`,
+      })
+    );
+    return deviceApi
+      .updateDevice({
+        ...device.connection,
+        updateUrl: device.swUpdateInfo.manifest.packageLocation,
+      })
+      .then(() => {
+        dispatch(
+          log({
+            source: "device",
+            level: "info",
+            message: "Device update finished download, installing...",
+          })
+        );
+        dispatch(deviceUpdateSuccess());
+      })
+      .catch((error) => {
+        console.error(error);
+        dispatch(
+          log({
+            source: "device",
+            level: "error",
+            message: "Device update failed: " + JSON.stringify(error),
+          })
+        );
+        dispatch(deviceUpdateFailed());
+      });
   };
 }

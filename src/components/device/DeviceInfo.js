@@ -23,6 +23,14 @@ const DeviceInfo = ({ connection, info }) => {
         <label className="md-label element">Model</label>
         <label className="md-label element">{info.model}</label>
       </div>
+      {/* <div className="input-container">
+        <label className="md-label element">Platform</label>
+        <label className="md-label element">{info.platform}</label>
+      </div> */}
+      <div className="input-container">
+        <label className="md-label element">Software</label>
+        <label className="md-label element">{info.softwareVersion}</label>
+      </div>
       <div className="input-container">
         <label className="md-label element">Serial number</label>
         <label className="md-label element">{info.serialNumber}</label>

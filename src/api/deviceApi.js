@@ -216,3 +216,28 @@ export async function resetDevice({ ipAddress, username, password }) {
     });
   });
 }
+
+export async function updateDevice({
+  ipAddress,
+  username,
+  password,
+  updateUrl,
+}) {
+  return new Promise((resolve, reject) => {
+    createXapiClient(ipAddress, username, password).then(async (xapi) => {
+      try {
+        const configResult = [];
+        const res = await xapi.Command.SystemUnit.SoftwareUpgrade({
+          URL: updateUrl,
+        });
+        configResult.push("device update, result: " + JSON.stringify(res));
+        console.log("device update");
+        xapi.close();
+        resolve(configResult); // Resolve the Promise with the status
+      } catch (error) {
+        console.error(`device update error: ${JSON.stringify(error)}`);
+        reject(error); // Reject the Promise if there's an error
+      }
+    });
+  });
+}
