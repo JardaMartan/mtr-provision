@@ -2,11 +2,11 @@ import * as types from "../actions/actionTypes";
 import initialState from "./initialState";
 
 export default function deviceReducer(state = initialState.device, action) {
-  console.log(
-    `deviceReducer: ${JSON.stringify(action)},\n state: ${JSON.stringify(
-      state
-    )} `
-  );
+  // console.log(
+  //   `deviceReducer: ${JSON.stringify(action)},\n state: ${JSON.stringify(
+  //     state
+  //   )} `
+  // );
   switch (action.type) {
     case types.DEVICE_LOGIN_SUCCESS:
       return { ...state, info: { ...state.info, ...action.info } };
