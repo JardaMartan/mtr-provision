@@ -741,6 +741,7 @@ export function swUpdateInfo(modelName, channel) {
     return roomOSApi
       .getManifest(modelName, channel)
       .then((swUpdateInfo) => {
+        console.log("received manifest: " + JSON.stringify(swUpdateInfo));
         dispatch({
           type: types.SWUPDATE_INFO_SUCCESS,
           swUpdateInfo,

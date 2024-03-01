@@ -37,12 +37,19 @@ function ManageDeviceLogin({
   const [availableVersion, setAvailableVersion] = useState("");
 
   useEffect(() => {
-    setDeviceConnected(info.status === "connected");
-    if (info.status === "connected") {
-      console.log(`device connected: ${info.status}`);
+    console.log(`device connection status: ${info.status}`);
+    if ((device.info.status === "connected") !== deviceConnected) {
+      console.log("device status changed");
+      setDeviceConnected(info.status === "connected");
+    }
+  }, [info]);
+
+  useEffect(() => {
+    if (deviceConnected) {
+      console.log("query swUpdateInfo");
       swUpdateInfo(info.platform, device.swChannel);
     }
-  }, [info, device.swChannel]);
+  }, [device.swChannel, deviceConnected]);
 
   useEffect(() => {
     console.log("swUpdateInfo changed");
